@@ -85,9 +85,10 @@ var SETS=[
 {id:'enojo',n:'Si me enojo',k:'st',i:[['🛑','Me detengo'],['🌬️','Respiro profundo 3 veces'],['🗣️','Digo «estoy enojado»'],['✋','Pido una pausa'],['🧘','Me calmo y vuelvo']]},
 {id:'cambio',n:'Cambio de rutina',k:'st',i:[['📅','Hoy algo cambia'],['👀','Miro el nuevo plan'],['🌬️','Respiro'],['💬','Pregunto si tengo dudas'],['✅','Lo intento']]},
 {id:'sem',n:'Semáforo de conducta',k:'se',i:[['🔴','Me detengo y respiro'],['🟡','Pido ayuda o una pausa'],['🟢','Sigo con mi actividad']]}];
-var LIM=8;
+var LIM=8,ORG='ef680ae6-d990-43a5-adff-0af14f47529a',BUY='https://buy.polar.sh/polar_cl_GuC83zBjvnYi7SgXE8QsGNO1qm7d07aDexB9h1ymKVi',API='https://api.polar.sh/v1/customer-portal/license-keys',GR=14*864e5;
 var S={pro:false,sid:'bano',name:'',fmt:{},items:{},prof:[]};
 try{var sv=localStorage.getItem('mv-app2');if(sv){var p=JSON.parse(sv);if(p&&p.items&&p.prof)S=p}}catch(e){}
+S.pro=!!(S.lic&&S.lic.last&&Date.now()-S.lic.last<GR);
 function save(){try{localStorage.setItem('mv-app2',JSON.stringify(S))}catch(e){}}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 var $=function(i){return document.getElementById(i)};
@@ -97,12 +98,21 @@ function fmt(){var c=cur();return S.fmt[c.id]||(c.k=='ca'?'car':'tira')}
 function pick(id){var c=SETS.filter(function(x){return x.id==id})[0];if(!c.f&&!S.pro){alert('Este set es de la versión Pro. Activa tu licencia para usarlo.');return}S.sid=id;save();draw()}
 function bar(){$('sets').innerHTML=SETS.map(function(x){return '<button class="'+(x.id==S.sid?'on':'')+'" onclick="pick(\''+x.id+'\')">'+((x.f||S.pro)?'':'🔒 ')+x.n+'</button>'}).join('')}
 function opts(v){return EM.concat(['🔴','🟡','🟢']).map(function(e){return '<option'+(e==v?' selected':'')+'>'+e+'</option>'}).join('')}
-function unlock(){var v=$('lic').value.trim().toUpperCase();if(/^PRO-[A-Z0-9]{4,}$/.test(v)){S.pro=true;save();draw()}else alert('Código no válido. Debe empezar con PRO- y no tener espacios.')}
+function lic(path,body){return fetch(API+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){return r.json().catch(function(){return {}}).then(function(j){return {ok:r.ok,st:r.status,j:j}})})}
+function unlock(){var k=$('lic').value.trim();if(!k){alert('Pega tu clave de licencia.');return}
+if(!ORG){alert('Las licencias aún no están configuradas en esta página.');return}
+var b=$('act');b.disabled=true;b.textContent='Comprobando…';
+lic('/activate',{key:k,organization_id:ORG,label:'Navegador '+new Date().toISOString().slice(0,10)}).then(function(r){
+if(r.ok&&r.j&&r.j.id){S.lic={key:k,act:r.j.id,last:Date.now()};S.pro=true;save();draw();return}
+alert('No se pudo activar esa clave. Revisa que esté completa, que tu suscripción siga activa y que no hayas superado el límite de 2 dispositivos.')}).catch(function(){alert('No se pudo conectar para comprobar la licencia. Revisa tu internet e inténtalo de nuevo.')}).then(function(){var b=$('act');if(b){b.disabled=false;b.textContent='Activar'}})}
+function recheck(){if(!S.lic||!ORG)return;lic('/validate',{key:S.lic.key,organization_id:ORG,activation_id:S.lic.act}).then(function(r){
+if(r.ok&&r.j&&r.j.status==='granted'){S.lic.last=Date.now();S.pro=true;save();return}
+if(r.st===404||r.st===422||(r.ok&&r.j&&r.j.status&&r.j.status!=='granted')){S.lic=null;S.pro=false;save();draw()}}).catch(function(){})}
 function proBox(){if(S.pro){var h='<div class="pro"><b>Pro activo.</b> Perfiles guardados:';
 if(!S.prof.length)h+='<div class="hint">Aún no hay perfiles. Escribe un nombre y pulsa «Guardar perfil».</div>';
 S.prof.forEach(function(p,i){h+='<div class="prof"><span>'+esc(p.name)+' · '+esc(SETS.filter(function(x){return x.id==p.sid})[0].n)+'</span><button class="btn alt" onclick="ld('+i+')">Abrir</button><button class="x" aria-label="Borrar perfil" onclick="dp('+i+')">✕</button></div>'});
 return h+'</div>'}
-return '<div class="pro">Gratis: 3 sets, hasta '+LIM+' elementos y marca de agua. Pro: los 8 sets, sin límites, sin marca de agua y perfiles guardados por estudiante.<input id="lic" placeholder="Código de licencia (PRO-…)"><button class="btn alt" onclick="unlock()">Activar</button></div>'}
+return '<div class="pro">Gratis: 3 sets, hasta '+LIM+' elementos y marca de agua. Pro: los 8 sets, sin límites, sin marca de agua y perfiles guardados por estudiante.<div class="acts"><a class="btn" style="text-decoration:none;display:inline-block" href="'+BUY+'" target="_blank" rel="noopener">Comprar Pro</a></div><p class="hint">¿Ya compraste? Pega la clave que llegó a tu correo.</p><input id="lic" placeholder="Tu clave de licencia"><button class="btn alt" id="act" onclick="unlock()">Activar</button></div>'}
 function sp(){if(!S.name.trim()){alert('Escribe primero el nombre del estudiante.');return}S.prof.push({name:S.name.trim(),sid:S.sid,fmt:fmt(),items:its().map(function(a){return a.slice()})});save();draw()}
 function ld(i){var p=S.prof[i];S.sid=p.sid;S.name=p.name;S.fmt[p.sid]=p.fmt;S.items[p.sid]=p.items.map(function(a){return a.slice()});save();draw()}
 function dp(i){S.prof.splice(i,1);save();draw()}
@@ -126,6 +136,8 @@ if(!S.pro)h+='<div class="wm">Hecho con Rutinas Visuales · versión gratis</div
 $('sheet').innerHTML=h;save()}
 function draw(){bar();ed();sh()}
 draw();
+if(/[?&]compra=ok/.test(location.search)){document.querySelector('header').insertAdjacentHTML('beforeend','<p style="margin-top:10px;font-weight:800;color:var(--acc)">¡Gracias por tu compra! Revisa tu correo, copia tu clave de licencia y pégala en el panel para activar Pro.</p>')}
+recheck();
 </script>
 </body>
 </html>
