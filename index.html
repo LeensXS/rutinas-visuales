@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rutinas Visuales: agendas, pictogramas y tarjetas para imprimir</title>
+<meta name="description" content="Crea e imprime rutinas visuales, agendas, tarjetas de emociones y semáforo de conducta para niños con TEA y TDAH. Listo en minutos.">
+<meta property="og:title" content="Rutinas Visuales">
+<meta property="og:description" content="Agendas, pictogramas y tarjetas para imprimir, pensadas para docentes, psicólogos y familias.">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f8fb;--card:#fff;--ink:#1c3556;--mut:#5d7088;--line:#d3dee9;--acc:#0e8f7e;--accink:#fff;--sun:#f5c542;--r:#e4574f;--y:#f5b82e;--g:#3aa55d;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101a26;--card:#182638;--ink:#e6eef8;--mut:#9db0c6;--line:#2c4058;--acc:#3cc3af;--accink:#06231e}}
+:root[data-theme="dark"]{--bg:#101a26;--card:#182638;--ink:#e6eef8;--mut:#9db0c6;--line:#2c4058;--acc:#3cc3af;--accink:#06231e}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Nunito,system-ui,sans-serif}
+header{padding:20px 16px 8px;max-width:1100px;margin:auto}
+h1{margin:0;font-size:1.6rem;font-weight:800}
+header p{margin:4px 0 0;color:var(--mut)}
+nav{display:flex;gap:8px;padding:12px 16px;max-width:1100px;margin:auto;overflow-x:auto}
+nav button{border:2px solid var(--line);background:var(--card);color:var(--ink);padding:10px 16px;border-radius:999px;font:700 15px Nunito,system-ui,sans-serif;cursor:pointer;white-space:nowrap}
+nav button.on{background:var(--acc);border-color:var(--acc);color:var(--accink)}
+main{display:grid;grid-template-columns:minmax(280px,380px) 1fr;gap:16px;padding:8px 16px 32px;max-width:1100px;margin:auto}
+@media (max-width:760px){main{grid-template-columns:1fr}}
+.ui{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;align-self:start}
+label{display:block;font-weight:700;font-size:.9rem;margin:0 0 10px}
+input,select,textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;margin-top:4px}
+textarea{min-height:70px;resize:vertical}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible{outline:3px solid var(--sun);outline-offset:1px}
+.row{display:grid;grid-template-columns:62px 1fr 64px 34px;gap:6px;margin-bottom:6px;align-items:center}
+.row *{margin:0}.row select{padding:6px 2px}
+.btn{border:0;background:var(--acc);color:var(--accink);font:800 15px Nunito,system-ui,sans-serif;padding:10px 16px;border-radius:10px;cursor:pointer}
+.btn.alt{background:transparent;color:var(--ink);border:2px solid var(--line)}
+.x{border:0;background:transparent;color:var(--mut);font-size:18px;cursor:pointer}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chk{display:flex;align-items:center;gap:8px;font-weight:700;margin:0 0 6px}.chk input{width:auto;margin:0}
+.pro{margin-top:16px;padding-top:12px;border-top:1px dashed var(--line);font-size:.85rem;color:var(--mut)}
+.pro input{margin:6px 0}
+.sheet{background:#fff;color:#1c3556;border:2px solid var(--line);border-radius:14px;padding:24px;min-height:420px}
+.sheet h2{margin:0 0 16px;font-size:1.8rem;text-align:center;font-weight:800}
+.it{display:flex;align-items:center;gap:14px;border:3px solid #1c3556;border-radius:14px;padding:10px 14px;margin-bottom:10px}
+.it .e{font-size:2.4rem;line-height:1}.it .t{flex:1;font-size:1.3rem;font-weight:800}
+.it .h{font-size:1.2rem;font-weight:800;background:#f5c542;border-radius:8px;padding:2px 10px}
+.it .n{width:38px;height:38px;border-radius:50%;background:#0e8f7e;color:#fff;font-weight:800;font-size:1.2rem;display:grid;place-items:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px}
+.em{border:3px solid #1c3556;border-radius:16px;text-align:center;padding:12px 6px}
+.em b{display:block;font-size:3.2rem;line-height:1.1}.em span{font-weight:800;font-size:1.15rem}
+.sem{display:flex;align-items:center;gap:16px;border-radius:16px;padding:14px 18px;margin-bottom:12px;color:#1c3556}
+.sem i{width:54px;height:54px;border-radius:50%;flex:none;border:4px solid #1c3556}
+.sem div{font-size:1.2rem;font-weight:700;white-space:pre-wrap}
+.sem.r{background:#fbd5d2}.sem.r i{background:var(--r)}.sem.y{background:#fdecc0}.sem.y i{background:var(--y)}.sem.g{background:#cdebd7}.sem.g i{background:var(--g)}
+.wm{margin-top:14px;text-align:center;font-size:.75rem;color:#6b7c90}
+.empty{text-align:center;color:#6b7c90;padding:30px}
+@media print{@page{margin:12mm}body{background:#fff}header,nav,.ui{display:none}main{display:block;padding:0}.sheet{border:0;padding:0}}
+@media (prefers-reduced-motion:no-preference){.btn,nav button{transition:transform .1s}.btn:active{transform:scale(.97)}}
+.sub{text-align:center;font-weight:800;color:#0e8f7e;margin:-8px 0 14px;font-size:1.15rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:0}
+.card{border:2px dashed #1c3556;padding:14px 8px;text-align:center;break-inside:avoid;position:relative;min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.card b{font-size:3.2rem;line-height:1.1}.card span{font-weight:800;font-size:1.1rem}
+.card u{position:absolute;top:6px;left:8px;text-decoration:none;background:#0e8f7e;color:#fff;border-radius:50%;width:26px;height:26px;font-weight:800;display:grid;place-items:center;font-size:.9rem}
+.sets{display:flex;gap:8px;padding:4px 16px 12px;max-width:1100px;margin:auto;overflow-x:auto}
+.sets button{border:2px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:12px;font:700 14px Nunito,system-ui,sans-serif;cursor:pointer;white-space:nowrap}
+.sets button.on{background:var(--acc);border-color:var(--acc);color:var(--accink)}
+.hint{font-size:.85rem;color:var(--mut);margin:6px 0}
+.prof{display:flex;gap:6px;align-items:center;margin:4px 0;font-size:.9rem}.prof span{flex:1}
+.row{grid-template-columns:62px 1fr 34px!important}
+@media print{.sets{display:none}}
+</style>
+</head>
+<body>
+<header><h1>Rutinas Visuales</h1><p>Elige un set ya armado, escribe el nombre del estudiante e imprime. Hecho para docentes, psicólogos y familias.</p></header>
+<nav class="sets" id="sets" aria-label="Sets disponibles"></nav>
+<main><section class="ui" id="ui"></section><section><div class="sheet" id="sheet"></div></section></main>
+<script>
+var EM=['🚪','🚽','🧻','🚰','💦','🧼','👐','🚿','🏫','🎒','🧥','💺','📚','✏️','🥪','🥤','⚽','🤝','🔔','🛑','🌬️','🗣️','✋','🧘','📅','👀','💬','✅','👂','🌳','🚶','🎨','🎵','🍎','⏰','🛏️','🏠','😀','😢','😡'];
+var EMO=[['😀','Alegre'],['😢','Triste'],['😡','Enojado'],['😨','Miedo'],['😲','Sorpresa'],['😴','Cansado'],['😖','Frustrado'],['😰','Nervioso'],['🥰','Cariño'],['😕','Confundido'],['😳','Vergüenza'],['😌','Tranquilo']];
+var SETS=[
+{id:'bano',n:'Ir al baño',k:'st',f:1,i:[['🚪','Entro y cierro la puerta'],['🚽','Uso el baño'],['🧻','Me limpio'],['🚰','Jalo la palanca'],['🧼','Me lavo las manos'],['🏫','Regreso al aula']]},
+{id:'manos',n:'Lavarme las manos',k:'st',f:1,i:[['🚰','Abro el caño'],['💦','Mojo mis manos'],['🧼','Pongo jabón'],['👐','Froto mis manos 20 segundos'],['🚿','Enjuago'],['🧻','Seco mis manos']]},
+{id:'emo',n:'¿Cómo me siento hoy?',k:'ca',f:1,i:EMO},
+{id:'entrada',n:'Entrada al colegio',k:'st',i:[['🏫','Saludo al llegar'],['🎒','Guardo mi mochila'],['🧥','Cuelgo mi casaca'],['💺','Me siento en mi sitio'],['📚','Saco mi cuaderno']]},
+{id:'recreo',n:'Recreo',k:'st',i:[['🥪','Como mi lonchera'],['🥤','Tomo agua'],['⚽','Elijo un juego'],['🤝','Pregunto «¿puedo jugar?»'],['🔔','Suena la campana: vuelvo a la fila']]},
+{id:'enojo',n:'Si me enojo',k:'st',i:[['🛑','Me detengo'],['🌬️','Respiro profundo 3 veces'],['🗣️','Digo «estoy enojado»'],['✋','Pido una pausa'],['🧘','Me calmo y vuelvo']]},
+{id:'cambio',n:'Cambio de rutina',k:'st',i:[['📅','Hoy algo cambia'],['👀','Miro el nuevo plan'],['🌬️','Respiro'],['💬','Pregunto si tengo dudas'],['✅','Lo intento']]},
+{id:'sem',n:'Semáforo de conducta',k:'se',i:[['🔴','Me detengo y respiro'],['🟡','Pido ayuda o una pausa'],['🟢','Sigo con mi actividad']]}];
+var LIM=8;
+var S={pro:false,sid:'bano',name:'',fmt:{},items:{},prof:[]};
+try{var sv=localStorage.getItem('mv-app2');if(sv){var p=JSON.parse(sv);if(p&&p.items&&p.prof)S=p}}catch(e){}
+function save(){try{localStorage.setItem('mv-app2',JSON.stringify(S))}catch(e){}}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+var $=function(i){return document.getElementById(i)};
+function cur(){return SETS.filter(function(x){return x.id==S.sid})[0]}
+function its(){var c=cur();return S.items[c.id]||(S.items[c.id]=c.i.map(function(a){return a.slice()}))}
+function fmt(){var c=cur();return S.fmt[c.id]||(c.k=='ca'?'car':'tira')}
+function pick(id){var c=SETS.filter(function(x){return x.id==id})[0];if(!c.f&&!S.pro){alert('Este set es de la versión Pro. Activa tu licencia para usarlo.');return}S.sid=id;save();draw()}
+function bar(){$('sets').innerHTML=SETS.map(function(x){return '<button class="'+(x.id==S.sid?'on':'')+'" onclick="pick(\''+x.id+'\')">'+((x.f||S.pro)?'':'🔒 ')+x.n+'</button>'}).join('')}
+function opts(v){return EM.concat(['🔴','🟡','🟢']).map(function(e){return '<option'+(e==v?' selected':'')+'>'+e+'</option>'}).join('')}
+function unlock(){var v=$('lic').value.trim().toUpperCase();if(/^PRO-[A-Z0-9]{4,}$/.test(v)){S.pro=true;save();draw()}else alert('Código no válido. Debe empezar con PRO- y no tener espacios.')}
+function proBox(){if(S.pro){var h='<div class="pro"><b>Pro activo.</b> Perfiles guardados:';
+if(!S.prof.length)h+='<div class="hint">Aún no hay perfiles. Escribe un nombre y pulsa «Guardar perfil».</div>';
+S.prof.forEach(function(p,i){h+='<div class="prof"><span>'+esc(p.name)+' · '+esc(SETS.filter(function(x){return x.id==p.sid})[0].n)+'</span><button class="btn alt" onclick="ld('+i+')">Abrir</button><button class="x" aria-label="Borrar perfil" onclick="dp('+i+')">✕</button></div>'});
+return h+'</div>'}
+return '<div class="pro">Gratis: 3 sets, hasta '+LIM+' elementos y marca de agua. Pro: los 8 sets, sin límites, sin marca de agua y perfiles guardados por estudiante.<input id="lic" placeholder="Código de licencia (PRO-…)"><button class="btn alt" onclick="unlock()">Activar</button></div>'}
+function sp(){if(!S.name.trim()){alert('Escribe primero el nombre del estudiante.');return}S.prof.push({name:S.name.trim(),sid:S.sid,fmt:fmt(),items:its().map(function(a){return a.slice()})});save();draw()}
+function ld(i){var p=S.prof[i];S.sid=p.sid;S.name=p.name;S.fmt[p.sid]=p.fmt;S.items[p.sid]=p.items.map(function(a){return a.slice()});save();draw()}
+function dp(i){S.prof.splice(i,1);save();draw()}
+function ed(){var c=cur(),h='<label>Nombre del estudiante (opcional)<input value="'+esc(S.name)+'" oninput="S.name=this.value;sh()"></label>';
+if(c.k!='se')h+='<label>Formato<select onchange="S.fmt[S.sid]=this.value;sh()"><option value="tira"'+(fmt()=='tira'?' selected':'')+'>Tira vertical</option><option value="car"'+(fmt()=='car'?' selected':'')+'>Tarjetas recortables</option></select></label>';
+its().forEach(function(r,i){h+='<div class="row"><select aria-label="Pictograma" onchange="its()['+i+'][0]=this.value;sh()">'+opts(r[0])+'</select><input aria-label="Texto" value="'+esc(r[1])+'" oninput="its()['+i+'][1]=this.value;sh()">'+(c.k=='se'?'<span></span>':'<button class="x" aria-label="Quitar" onclick="del('+i+')">✕</button>')+'</div>'});
+h+='<div class="acts">'+(c.k=='se'?'':'<button class="btn alt" onclick="add()">Agregar</button>')+'<button class="btn" onclick="window.print()">Imprimir o guardar PDF</button></div>';
+if(fmt()=='car'&&c.k!='se')h+='<p class="hint">Consejo: imprime en cartulina, recorta por las líneas punteadas y plastifica.</p>';
+h+='<div class="acts"><button class="btn alt" onclick="rs()">Restablecer este set</button>'+(S.pro?'<button class="btn alt" onclick="sp()">Guardar perfil</button>':'')+'</div>'+proBox();
+$('ui').innerHTML=h}
+function add(){if(!S.pro&&its().length>=LIM){alert('La versión gratis permite hasta '+LIM+' elementos. Activa Pro para agregar más.');return}its().push(['✅','Nuevo paso']);save();draw()}
+function del(i){its().splice(i,1);save();draw()}
+function rs(){if(confirm('¿Volver al contenido original de este set?')){delete S.items[S.sid];save();draw()}}
+function sh(){var c=cur(),a=its(),h='<h2>'+esc(c.n)+'</h2>';
+if(S.name.trim())h+='<div class="sub">Para: '+esc(S.name.trim())+'</div>';
+if(!a.length)h+='<div class="empty">Agrega al menos un elemento.</div>';
+if(c.k=='se'){var cl=['r','y','g'];a.forEach(function(r,i){h+='<div class="sem '+cl[i]+'"><i></i><div>'+esc(r[1])+'</div></div>'})}
+else if(fmt()=='car'){h+='<div class="cards">'+a.map(function(r,i){return '<div class="card">'+(c.k=='st'?'<u>'+(i+1)+'</u>':'')+'<b>'+r[0]+'</b><span>'+esc(r[1])+'</span></div>'}).join('')+'</div>'}
+else a.forEach(function(r,i){h+='<div class="it">'+(c.k=='st'?'<div class="n">'+(i+1)+'</div>':'')+'<div class="e">'+r[0]+'</div><div class="t">'+esc(r[1])+'</div></div>'});
+if(!S.pro)h+='<div class="wm">Hecho con Rutinas Visuales · versión gratis</div>';
+$('sheet').innerHTML=h;save()}
+function draw(){bar();ed();sh()}
+draw();
+</script>
+</body>
+</html>
